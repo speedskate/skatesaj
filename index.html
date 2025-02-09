@@ -3,55 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A.J SPEED SKATING ACADEMY</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Admin Panel - A.J SPEED SKATING ACADEMY</title>
+    <link rel="stylesheet" href="admin-styles.css">
 </head>
 <body>
-    <!-- Login Section -->
-    <div id="loginSection" class="login-container">
-        <div class="login-box">
-            <h2>Welcome to A.J Speed Skating Academy</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
+    <!-- Admin Login Section -->
+    <div id="adminLoginSection" class="admin-login-container">
+        <div class="admin-login-box">
+            <h2>Admin Login</h2>
+            <form id="adminLoginForm" onsubmit="return handleAdminLogin(event)">
                 <div class="input-group">
-                    <input type="text" id="loginId" required placeholder="Email or Phone Number">
+                    <input type="text" id="adminUsername" required placeholder="Username">
                 </div>
-                <button type="submit" class="login-btn">Login</button>
+                <div class="input-group">
+                    <input type="password" id="adminPassword" required placeholder="Password">
+                </div>
+                <button type="submit" class="admin-login-btn">Login</button>
             </form>
         </div>
     </div>
 
-    <!-- Main Website Section -->
-    <div id="mainSection" class="main-container hidden">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="logo">A.J SPEED SKATING</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#batches">Batches</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" onclick="logout()">Logout</a></li>
-            </ul>
+    <!-- Admin Dashboard Section -->
+    <div id="adminDashboard" class="dashboard-container hidden">
+        <nav class="admin-navbar">
+            <div class="admin-logo">Admin Dashboard</div>
+            <button onclick="adminLogout()" class="logout-btn">Logout</button>
         </nav>
 
-        <!-- Batches Section -->
-        <section id="batches" class="section">
-            <h2>Our Skating Batches</h2>
-            <div id="batchesContainer" class="batches-grid"></div>
-        </section>
+        <div class="dashboard-content">
+            <div class="sidebar">
+                <ul>
+                    <li class="active" data-section="batchManagement">Batch Management</li>
+                    <li data-section="enquiries">Enquiries</li>
+                    <li data-section="settings">Settings</li>
+                </ul>
+            </div>
 
-        <!-- Contact Form Section -->
-        <section id="contact" class="section">
-            <h2>Contact Us</h2>
-            <form id="contactForm" class="contact-form">
-                <input type="text" placeholder="Name" required>
-                <input type="email" placeholder="Email" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <textarea placeholder="Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
+            <div class="main-content">
+                <!-- Batch Management Section -->
+                <section id="batchManagement" class="content-section">
+                    <h2>Batch Management</h2>
+                    <div class="action-bar">
+                        <button onclick="showAddBatchForm()" class="add-btn">Add New Batch</button>
+                    </div>
+                    
+                    <div id="addBatchForm" class="form-container hidden">
+                        <h3>Add New Batch</h3>
+                        <form id="batchForm">
+                            <input type="text" id="batchName" placeholder="Batch Name" required>
+                            <input type="text" id="timing" placeholder="Timing" required>
+                            <input type="text" id="coach" placeholder="Coach Name" required>
+                            <input type="number" id="fees" placeholder="Fees" required>
+                            <div class="form-buttons">
+                                <button type="submit" class="save-btn">Save Batch</button>
+                                <button type="button" onclick="cancelAddBatch()" class="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="batchesList" class="batches-list">
+                        <!-- Batches will be loaded here dynamically -->
+                    </div>
+                </section>
+
+                <!-- Enquiries Section -->
+                <section id="enquiries" class="content-section hidden">
+                    <h2>Enquiries</h2>
+                    <div id="enquiriesList" class="enquiries-list">
+                        <!-- Enquiries will be loaded here dynamically -->
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section hidden">
+                    <h2>Settings</h2>
+                    <div class="settings-form">
+                        <h3>Admin Account</h3>
+                        <form id="settingsForm">
+                            <div class="form-group">
+                                <label>Change Username</label>
+                                <input type="text" id="newUsername" placeholder="New Username">
+                            </div>
+                            <div class="form-group">
+                                <label>Change Password</label>
+                                <input type="password" id="newPassword" placeholder="New Password">
+                            </div>
+                            <button type="submit" class="save-btn">Save Changes</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="admin-script.js"></script>
 </body>
 </html>
